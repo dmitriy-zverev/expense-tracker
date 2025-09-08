@@ -15,12 +15,20 @@ type Command struct {
 	Cmd         string
 }
 
-const (
-	DESCRIPTION_PARAM = "--description"
-	AMOUNT_PARAM      = "--amount"
-	ID_PARAM          = "--id"
-	MONTH_PARAM       = "--month"
-)
+func (cmd *Command) Run() error {
+	initCommands()
+
+	command, ok := commands[cmd.Cmd]
+	if !ok {
+		return errors.New(cmd.Cmd + " is not found")
+	}
+
+	if err := command.Callback(*cmd); err != nil {
+		return err
+	}
+
+	return nil
+}
 
 func help() {
 	fmt.Printf("Usage: et <command> [-argument 1] [description 1] ...\n")
