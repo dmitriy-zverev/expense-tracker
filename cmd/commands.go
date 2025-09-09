@@ -8,6 +8,15 @@ type cliCommand struct {
 
 var commands map[string]cliCommand
 
+/**
+* Initializes the commands map with available CLI commands.
+* Each command is defined with a name, description, and callback function.
+* Supported commands:
+* - "add": Adds an expense to the tracker
+* - "list": Lists all expenses
+* - "delete": Deletes an expense by its ID
+* - "update": Updates an expense by its id
+ */
 func initCommands() {
 	commands = map[string]cliCommand{
 		"add": {
@@ -24,6 +33,16 @@ func initCommands() {
 			Name:        "delete",
 			Description: "Deletes expense with provided id",
 			Callback:    delete,
+		},
+		"update": {
+			Name:        "update",
+			Description: "Updates expense with provided id",
+			Callback:    update,
+		},
+		"summary": {
+			Name:        "summary",
+			Description: "Summarizes all expenses—if set within provided month",
+			Callback:    summary,
 		},
 	}
 }

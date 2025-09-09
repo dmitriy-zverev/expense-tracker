@@ -13,6 +13,7 @@ type Expense struct {
 	Amount      float64   `json:"amount"`
 	Date        time.Time `json:"date"`
 	ID          int       `json:"id"`
+	Month       int       `json:"month"`
 	IsDeleted   bool      `json:"is_deleted"`
 	Description string    `json:"description"`
 	Category    string    `json:"category"`
@@ -28,13 +29,16 @@ func CreateExpenseObj(amount float64, desc, category string) (Expense, error) {
 		return Expense{}, err
 	}
 
+	date := time.Now().UTC()
+
 	return Expense{
 		Amount:      amount,
 		Description: desc,
 		Category:    category,
 		IsDeleted:   false,
-		Date:        time.Now().UTC(),
+		Date:        date,
 		ID:          len(expenses),
+		Month:       int(date.Month()),
 	}, nil
 }
 
@@ -57,17 +61,12 @@ func GetExpenses() ([]Expense, error) {
 }
 
 func GetExpense(id int) (Expense, error) {
-	fileData, err := storage.GetFileData(EXPENSES_FILE_PATH)
+	expenses, err := GetExpenses()
 	if err != nil {
 		return Expense{}, err
 	}
 
-	expenses := []Expense{}
-	if err := json.Unmarshal(fileData, &expenses); err != nil {
-		return Expense{}, err
-	}
-
-	if id > len(expenses) {
+	if id > len(expenses) || id < 0 {
 		return Expense{}, errors.New("cannot find expense with provided id")
 	}
 
@@ -100,7 +99,7 @@ func DeleteExpense(id int) error {
 		return err
 	}
 
-	if id > len(expenses) {
+	if id > len(expenses) || id < 0 {
 		return errors.New("cannot find expense with provided id")
 	}
 
@@ -122,17 +121,19 @@ func DeleteExpense(id int) error {
 	return nil
 }
 
-func UpdateExpense(id int, exp Expense) error {
+func UpdateExpense(id int, amount float64, desc, category string) error {
 	expenses, err := GetExpenses()
 	if err != nil {
 		return err
 	}
 
-	if id > len(expenses) {
+	if id > len(expenses) || id < 0 {
 		return errors.New("cannot find expense with provided id")
 	}
 
-	expenses[id] = exp
+	expenses[id].Amount = float64(amount)
+	expenses[id].Description = desc
+	expenses[id].Category = category
 
 	data, err := json.Marshal(expenses)
 	if err != nil {

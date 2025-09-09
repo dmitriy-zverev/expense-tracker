@@ -7,6 +7,12 @@ import (
 	"github.com/dmitriy-zverev/expense-tracker/internal/utils"
 )
 
+/**
+* Adds a new expense after validating it.
+*
+* @param cmd The command containing the expense details.
+* @return An error if the expense creation, validation, or addition fails; otherwise, nil.
+ */
 func add(cmd Command) error {
 	exp, err := expense.CreateExpenseObj(
 		float64(cmd.Amount),
