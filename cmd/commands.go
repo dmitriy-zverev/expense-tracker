@@ -15,5 +15,10 @@ func initCommands() {
 			Description: "Adds expense to your tracker",
 			Callback:    add,
 		},
+		"list": {
+			Name:        "list",
+			Description: "Lists all of the expenses",
+			Callback:    list,
+		},
 	}
 }

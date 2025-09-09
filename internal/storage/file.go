@@ -1,1 +1,44 @@
 package storage
+
+import (
+	"os"
+)
+
+func GetFileData(fileName string) ([]byte, error) {
+	fileData, err := os.ReadFile(fileName)
+	if err != nil {
+		return []byte{}, err
+	}
+
+	return fileData, nil
+}
+
+func WriteFileData(fileName string, data []byte) error {
+	file, err := os.OpenFile(fileName, os.O_RDWR|os.O_CREATE, 0755)
+	if err != nil {
+		file.Close()
+		return err
+	}
+	defer file.Close()
+
+	if _, err := file.Write(data); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func AppendFileData(fileName string, data []byte) error {
+	file, err := os.OpenFile(fileName, os.O_RDWR|os.O_APPEND, 0755)
+	if err != nil {
+		file.Close()
+		return err
+	}
+	defer file.Close()
+
+	if _, err := file.Write(data); err != nil {
+		return err
+	}
+
+	return nil
+}

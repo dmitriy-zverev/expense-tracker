@@ -3,6 +3,7 @@ package cmd
 import (
 	"errors"
 	"fmt"
+	"os"
 	"slices"
 	"strconv"
 )
@@ -13,6 +14,7 @@ type Command struct {
 	Month       int
 	Description string
 	Cmd         string
+	Category    string
 }
 
 func (cmd *Command) Run() error {
@@ -96,6 +98,15 @@ func ParseCommand(args []string) (Command, error) {
 		}
 
 		cmd.Month = month
+	}
+
+	if slices.Contains(args, CATEGORY_PARAM) {
+		idx := slices.Index(args, CATEGORY_PARAM)
+		if idx+1 > len(args) {
+			return Command{}, errors.New("cannot find argument for --category")
+		}
+
+		cmd.Category = os.Args[idx+1]
 	}
 
 	return cmd, nil

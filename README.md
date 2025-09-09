@@ -5,7 +5,6 @@ Build a command-line expense tracker application in Go that allows users to mana
 
 ## Technology Stack
 - **Language**: Go (based on existing .gitignore)
-- **CLI Framework**: cobra (popular Go CLI framework)
 - **Data Storage**: JSON file for simplicity and human readability
 - **Testing**: Go's built-in testing framework
 - **Build Tool**: Go modules
@@ -22,8 +21,8 @@ expense-tracker/
 │   ├── summary.go       # Summary command
 │   └── export.go        # Export to CSV command
 ├── internal/
-│   ├── models/
-│   │   └── expense.go   # Expense data structure
+│   ├── expense/
+│   │   └── expense.go   # Expense management
 │   ├── storage/
 │   │   └── file.go      # File-based storage operations
 │   ├── budget/
@@ -105,9 +104,8 @@ type Budget struct {
 ## Implementation Phases
 
 ### Phase 1: Core Infrastructure
-- [ ] Initialize Go module
-- [ ] Set up Cobra CLI framework
-- [ ] Create basic project structure
+- [x] Initialize Go module
+- [x] Create basic project structure
 - [ ] Implement expense data model
 - [ ] Create file-based storage system
 - [ ] Implement basic error handling
