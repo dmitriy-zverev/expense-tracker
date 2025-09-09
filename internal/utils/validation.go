@@ -1,6 +1,8 @@
 package utils
 
-import "github.com/dmitriy-zverev/expense-tracker/internal/expense"
+import (
+	"github.com/dmitriy-zverev/expense-tracker/internal/expense"
+)
 
 func IsExpenseEmpty(exp expense.Expense) bool {
 	if exp.Description == "" &&

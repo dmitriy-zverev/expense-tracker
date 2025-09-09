@@ -12,6 +12,7 @@ type Command struct {
 	ID          int
 	Amount      int
 	Month       int
+	WithDeleted bool
 	Description string
 	Cmd         string
 	Category    string
@@ -44,10 +45,11 @@ func ParseCommand(args []string) (Command, error) {
 	}
 
 	cmd := Command{
-		Cmd:    args[1],
-		ID:     -1,
-		Month:  -1,
-		Amount: -1,
+		Cmd:         args[1],
+		ID:          -1,
+		Month:       -1,
+		Amount:      -1,
+		WithDeleted: false,
 	}
 
 	if slices.Contains(args, DESCRIPTION_PARAM) {
@@ -107,6 +109,10 @@ func ParseCommand(args []string) (Command, error) {
 		}
 
 		cmd.Category = os.Args[idx+1]
+	}
+
+	if slices.Contains(args, WITH_DELETED_PARAM) {
+		cmd.WithDeleted = true
 	}
 
 	return cmd, nil

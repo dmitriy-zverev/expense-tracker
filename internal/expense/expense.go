@@ -3,6 +3,7 @@ package expense
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
 	"time"
 
 	"github.com/dmitriy-zverev/expense-tracker/internal/storage"
@@ -20,19 +21,6 @@ type Expense struct {
 const (
 	EXPENSES_FILE_PATH = "./data/expenses.json"
 )
-
-func rewriteExpenses(expenses []Expense) error {
-	data, err := json.Marshal(expenses)
-	if err != nil {
-		return err
-	}
-
-	if err := storage.WriteFileData(EXPENSES_FILE_PATH, data); err != nil {
-		return err
-	}
-
-	return nil
-}
 
 func CreateExpenseObj(amount float64, desc, category string) (Expense, error) {
 	expenses, err := GetExpenses()
@@ -118,7 +106,16 @@ func DeleteExpense(id int) error {
 
 	expenses[id].IsDeleted = true
 
-	if err := rewriteExpenses(expenses); err != nil {
+	fmt.Println(expenses)
+
+	data, err := json.Marshal(expenses)
+	if err != nil {
+		return err
+	}
+
+	fmt.Println(string(data))
+
+	if err := storage.WriteFileData(EXPENSES_FILE_PATH, data); err != nil {
 		return err
 	}
 
@@ -137,7 +134,12 @@ func UpdateExpense(id int, exp Expense) error {
 
 	expenses[id] = exp
 
-	if err := rewriteExpenses(expenses); err != nil {
+	data, err := json.Marshal(expenses)
+	if err != nil {
+		return err
+	}
+
+	if err := storage.WriteFileData(EXPENSES_FILE_PATH, data); err != nil {
 		return err
 	}
 

@@ -20,5 +20,10 @@ func initCommands() {
 			Description: "Lists all of the expenses",
 			Callback:    list,
 		},
+		"delete": {
+			Name:        "delete",
+			Description: "Deletes expense with provided id",
+			Callback:    delete,
+		},
 	}
 }

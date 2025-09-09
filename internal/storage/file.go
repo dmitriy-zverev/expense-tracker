@@ -14,14 +14,7 @@ func GetFileData(fileName string) ([]byte, error) {
 }
 
 func WriteFileData(fileName string, data []byte) error {
-	file, err := os.OpenFile(fileName, os.O_RDWR|os.O_CREATE, 0755)
-	if err != nil {
-		file.Close()
-		return err
-	}
-	defer file.Close()
-
-	if _, err := file.Write(data); err != nil {
+	if err := os.WriteFile(fileName, data, 0755); err != nil {
 		return err
 	}
 
@@ -29,7 +22,7 @@ func WriteFileData(fileName string, data []byte) error {
 }
 
 func AppendFileData(fileName string, data []byte) error {
-	file, err := os.OpenFile(fileName, os.O_RDWR|os.O_APPEND, 0755)
+	file, err := os.OpenFile(fileName, os.O_RDWR|os.O_APPEND|os.O_CREATE, 0755)
 	if err != nil {
 		file.Close()
 		return err
