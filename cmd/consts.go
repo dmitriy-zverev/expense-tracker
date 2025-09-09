@@ -7,8 +7,10 @@ const (
 	MONTH_PARAM        = "--month"
 	CATEGORY_PARAM     = "--category"
 	WITH_DELETED_PARAM = "--with-deleted"
+	OUTPUT_PARAM       = "--output"
 )
 
 const (
 	PRINT_MAX_DESCRIPTION_LENGTH = 20
+	DEFAULT_EXPORT_FILE_PATH     = "./csv/expenses.csv"
 )

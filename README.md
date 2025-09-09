@@ -106,27 +106,27 @@ type Budget struct {
 ### Phase 1: Core Infrastructure
 - [x] Initialize Go module
 - [x] Create basic project structure
-- [ ] Implement expense data model
-- [ ] Create file-based storage system
-- [ ] Implement basic error handling
+- [x] Implement expense data model
+- [x] Create file-based storage system
+- [x] Implement basic error handling
 
 ### Phase 2: Core Commands
-- [ ] Implement `add` command
-- [ ] Implement `list` command
-- [ ] Implement `delete` command
-- [ ] Implement `summary` command
-- [ ] Add input validation
-- [ ] Create comprehensive tests
+- [x] Implement `add` command
+- [x] Implement `list` command
+- [x] Implement `delete` command
+- [x] Implement `summary` command
+- [x] Add input validation
+- [x] Create comprehensive tests
 
 ### Phase 3: Advanced Features
-- [ ] Implement `update` command
-- [ ] Add category support
-- [ ] Implement month-specific filtering
+- [x] Implement `update` command
+- [x] Add category support
+- [x] Implement month-specific filtering
 - [ ] Add budget management
 - [ ] Implement budget warnings
 
 ### Phase 4: Additional Features
-- [ ] Implement CSV export
+- [x] Implement CSV export
 - [ ] Add advanced filtering options
 - [ ] Improve error messages
 - [ ] Add configuration file support

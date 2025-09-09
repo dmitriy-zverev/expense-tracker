@@ -16,6 +16,7 @@ var commands map[string]cliCommand
 * - "list": Lists all expenses
 * - "delete": Deletes an expense by its ID
 * - "update": Updates an expense by its id
+* - "summary": Summarizes all expenses—if set within provided month
  */
 func initCommands() {
 	commands = map[string]cliCommand{
@@ -43,6 +44,11 @@ func initCommands() {
 			Name:        "summary",
 			Description: "Summarizes all expenses—if set within provided month",
 			Callback:    summary,
+		},
+		"export": {
+			Name:        "export",
+			Description: "Exports expenses into a .csv file—if set with custom file name",
+			Callback:    export,
 		},
 	}
 }

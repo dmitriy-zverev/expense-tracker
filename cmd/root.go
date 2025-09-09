@@ -16,6 +16,7 @@ type Command struct {
 	Description string
 	Cmd         string
 	Category    string
+	Output      string
 }
 
 func (cmd *Command) Run() error {
@@ -113,6 +114,15 @@ func ParseCommand(args []string) (Command, error) {
 
 	if slices.Contains(args, WITH_DELETED_PARAM) {
 		cmd.WithDeleted = true
+	}
+
+	if slices.Contains(args, OUTPUT_PARAM) {
+		idx := slices.Index(args, OUTPUT_PARAM)
+		if idx+1 > len(args) {
+			return Command{}, errors.New("cannot find argument for --output")
+		}
+
+		cmd.Output = os.Args[idx+1]
 	}
 
 	return cmd, nil
