@@ -395,4 +395,6 @@ This project is free to use. No additional requirements.
 
 Made with ❤️ by [Dmitriy Zverev](https://github.com/dmitriy-zverev)
 
+Inspired by [Roadmap.sh](https://roadmap.sh/projects/expense-tracker)
+
 </div>
