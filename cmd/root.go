@@ -9,14 +9,16 @@ import (
 )
 
 type Command struct {
+	Amount      float64
+	Limit       float64
 	ID          int
-	Amount      int
 	Month       int
 	WithDeleted bool
 	Description string
 	Cmd         string
 	Category    string
 	Output      string
+	BudgetCmd   string
 }
 
 func (cmd *Command) Run() error {
@@ -49,7 +51,8 @@ func ParseCommand(args []string) (Command, error) {
 		Cmd:         args[1],
 		ID:          -1,
 		Month:       -1,
-		Amount:      -1,
+		Amount:      -1.0,
+		Limit:       -1.0,
 		WithDeleted: false,
 	}
 
@@ -72,7 +75,7 @@ func ParseCommand(args []string) (Command, error) {
 			return Command{}, errors.New("argument for --amount is not a number")
 		}
 
-		cmd.Amount = amount
+		cmd.Amount = float64(amount)
 	}
 
 	if slices.Contains(args, ID_PARAM) {
@@ -123,6 +126,32 @@ func ParseCommand(args []string) (Command, error) {
 		}
 
 		cmd.Output = os.Args[idx+1]
+	}
+
+	if slices.Contains(args, LIMIT_PARAM) {
+		idx := slices.Index(args, LIMIT_PARAM)
+		if idx+1 > len(args) {
+			return Command{}, errors.New("cannot find argument for --limit")
+		}
+
+		limit, err := strconv.Atoi(args[idx+1])
+		if err != nil {
+			return Command{}, errors.New("argument for --limit is not a number")
+		}
+
+		cmd.Limit = float64(limit)
+	}
+
+	if slices.Contains(args, BUDGET_SET_CMD) {
+		cmd.BudgetCmd = BUDGET_SET_CMD
+	}
+
+	if slices.Contains(args, BUDGET_LIST_CMD) {
+		cmd.BudgetCmd = BUDGET_LIST_CMD
+	}
+
+	if slices.Contains(args, BUDGET_REMOVE_CMD) {
+		cmd.BudgetCmd = BUDGET_REMOVE_CMD
 	}
 
 	return cmd, nil

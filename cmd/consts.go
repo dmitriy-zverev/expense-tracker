@@ -8,6 +8,13 @@ const (
 	CATEGORY_PARAM     = "--category"
 	WITH_DELETED_PARAM = "--with-deleted"
 	OUTPUT_PARAM       = "--output"
+	LIMIT_PARAM        = "--limit"
+)
+
+const (
+	BUDGET_SET_CMD    = "set"
+	BUDGET_LIST_CMD   = "list"
+	BUDGET_REMOVE_CMD = "remove"
 )
 
 const (

@@ -73,6 +73,23 @@ func GetExpense(id int) (Expense, error) {
 	return expenses[id], nil
 }
 
+func GetExpenseForCategory(category string) (float64, error) {
+	expenses, err := GetExpenses()
+	if err != nil {
+		return 0.0, err
+	}
+
+	totalExpenses := 0.0
+
+	for _, e := range expenses {
+		if e.Category == category {
+			totalExpenses += e.Amount
+		}
+	}
+
+	return totalExpenses, nil
+}
+
 func AddExpense(exp Expense) error {
 	expenses, err := GetExpenses()
 	if err != nil {

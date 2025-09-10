@@ -50,5 +50,10 @@ func initCommands() {
 			Description: "Exports expenses into a .csv file—if set with custom file name",
 			Callback:    export,
 		},
+		"budget": {
+			Name:        "budget",
+			Description: "Sets budget for given month and category with provided limit",
+			Callback:    budgetCmd,
+		},
 	}
 }
