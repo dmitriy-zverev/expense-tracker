@@ -33,6 +33,10 @@ func list(cmd Command) error {
 			continue
 		}
 
+		if cmd.Category != "" && exp.Category != cmd.Category {
+			continue
+		}
+
 		year, month, day := exp.Date.Date()
 		dateString := fmt.Sprintf("%d-%d-%d", year, month, day)
 
