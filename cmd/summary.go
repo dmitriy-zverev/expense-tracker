@@ -27,6 +27,10 @@ func summary(cmd Command) error {
 			continue
 		}
 
+		if cmd.Category != "" && cmd.Category != exp.Category {
+			continue
+		}
+
 		totalExpenses += exp.Amount
 	}
 

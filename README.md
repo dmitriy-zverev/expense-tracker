@@ -127,7 +127,7 @@ type Budget struct {
 
 ### Phase 4: Additional Features
 - [x] Implement CSV export
-- [ ] Add advanced filtering options
+- [x] Add advanced filtering options
 - [ ] Improve error messages
 - [ ] Add configuration file support
 - [ ] Performance optimizations
